@@ -1,0 +1,7 @@
+@DirectoryService.Presentation_HostAddress = http://localhost:5136
+@DirectoryService = variable value
+
+GET {{DirectoryService.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
