@@ -3,7 +3,7 @@ using DirectoryService.Domain.Positions.ValueObjects;
 
 namespace DirectoryService.Domain.DepartmentPositions;
 
-public class DepartmentPosition
+public sealed class DepartmentPosition
 {
     public DepartmentPosition(
         DepartmentID departmentId, 
@@ -17,7 +17,7 @@ public class DepartmentPosition
     
     public DepartmentPositionID Id { get; }
     
-    public DepartmentID DepartmentId { get; }
+    public DepartmentID DepartmentId { get; private set; }
     
-    public PositionID PositionID { get; }
+    public PositionID PositionID { get; private set; }
 }

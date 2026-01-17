@@ -22,15 +22,15 @@ public sealed class Position
     
     public PositionID Id { get; }
 
-    public PositionName Name { get; }
+    public PositionName Name { get; private set; }
     
-    public Description Description { get; }
+    public Description Description { get; private set; }
     
-    public bool IsActiv { get; } 
+    public bool IsActiv { get; private set; } 
     
     public DateTime CreatedAt { get; }
     
-    public DateTime UpdatedAt { get; }
+    public DateTime UpdatedAt { get; private set; }
     
     public static Result<Position> Create(
         string name,

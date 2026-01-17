@@ -25,17 +25,17 @@ public sealed class Location
     
     public LocationID Id { get; }
 
-    public LocationName Name { get; }
+    public LocationName Name { get; private set; }
     
-    public Adress Adress { get; }
+    public Adress Adress { get; private set; }
     
-    public TimeZone TimeZone { get; }
+    public TimeZone TimeZone { get; private set; }
     
-    public bool IsActiv { get; } 
+    public bool IsActiv { get; private set; } 
     
     public DateTime CreatedAt { get; }
     
-    public DateTime UpdatedAt { get; }
+    public DateTime UpdatedAt { get; private set; }
     
     public static Result<Location> Create(
         string name,

@@ -28,23 +28,23 @@ public sealed class Department
         Parent = parent;
     }
     
-    public DepartmentID Id { get;  }
+    public DepartmentID Id { get; }
 
-    public DepartmentName Name { get;  }
+    public DepartmentName Name { get; private set; }
 
-    public DepartmentIndefier Indefier { get; }
+    public DepartmentIndefier Indefier { get; private set; }
 
-    public Department? Parent { get; }
+    public Department? Parent { get; private set; }
     
-    public DepartmentPath Path { get; }
+    public DepartmentPath Path { get; private set; }
     
-    public short Depth { get; }
+    public short Depth { get; private set; }
     
-    public bool IsActiv { get; }
+    public bool IsActiv { get; private set; }
     
-    public DateTime CreatedAt { get; }
+    public DateTime CreatedAt { get;  }
     
-    public DateTime UpdatedAt { get; }
+    public DateTime UpdatedAt { get; private set; }
 
     public static Result<Department> Create(
         string name,
