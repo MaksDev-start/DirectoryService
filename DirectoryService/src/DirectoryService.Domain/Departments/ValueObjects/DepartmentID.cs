@@ -2,12 +2,13 @@
 
 namespace DirectoryService.Domain.Departments.ValueObjects;
 
-public sealed record DepartmentID : EntityID
+public sealed record DepartmentId : EntityID
 {
-    private DepartmentID(Guid value)
+    private DepartmentId(Guid value)
         : base(value)
     {
     }
     
-    public static DepartmentID New() => new DepartmentID(Guid.NewGuid());
+    public static DepartmentId New(Guid? value = null) 
+        => new(value ?? Guid.NewGuid());
 }

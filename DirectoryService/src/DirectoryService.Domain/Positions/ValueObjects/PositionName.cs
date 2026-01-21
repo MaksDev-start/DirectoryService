@@ -4,7 +4,7 @@ namespace DirectoryService.Domain.Positions.ValueObjects;
 
 public sealed record PositionName
 {
-    private const int MAX_LENGTH = 100;
+    public const int MAX_LENGTH = 100;
     private const int MIN_LENGTH = 3;
     
     private PositionName(string value)

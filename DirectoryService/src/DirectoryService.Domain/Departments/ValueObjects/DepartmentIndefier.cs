@@ -5,7 +5,7 @@ namespace DirectoryService.Domain.Departments.ValueObjects;
 
 public sealed record DepartmentIndefier
 {
-    private const int MAX_LENGTH = 150;
+    public const int MAX_LENGTH = 150;
     private const int MIN_LENGTH = 3;
     private const string ONLY_LATIN = @"^[a-zA-Z\s\-]+$";
 

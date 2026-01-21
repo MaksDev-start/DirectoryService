@@ -4,9 +4,8 @@ namespace DirectoryService.Domain.Departments.ValueObjects;
 
 public sealed record DepartmentName
 {
-    private const int MAX_LENGTH = 150;
-    private const int MIN_LENGTH = 3;
-    
+    public const int MAX_LENGTH = 150;
+    public const int MIN_LENGTH = 3;
     private DepartmentName(string value)
     {
         Value = value;
@@ -26,7 +25,7 @@ public sealed record DepartmentName
             .Ensure(
                 name => name.Length >= MIN_LENGTH,
                 $"Department name must be at least {MIN_LENGTH} characters.")
-            .Map(name => new DepartmentName(name));
+            .Map<string, DepartmentName>(name => new DepartmentName(name));
 
     }
 }

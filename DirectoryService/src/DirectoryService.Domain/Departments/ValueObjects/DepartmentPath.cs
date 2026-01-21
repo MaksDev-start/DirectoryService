@@ -4,7 +4,7 @@ namespace DirectoryService.Domain.Departments.ValueObjects;
 
 public sealed record DepartmentPath
 {
-    private const int MAX_LENGTH = 100;
+    public const int MAX_LENGTH = 100;
     private const int MIN_LENGTH = 2;
     private const string Separator = ".";
 

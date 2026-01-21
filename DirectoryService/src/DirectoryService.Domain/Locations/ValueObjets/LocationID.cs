@@ -9,5 +9,6 @@ public sealed record LocationID : EntityID
     {
     }
 
-    public static LocationID New() => new(Guid.NewGuid());
+    public static LocationID New(Guid? value = null) 
+        => new(value ?? Guid.NewGuid());
 }

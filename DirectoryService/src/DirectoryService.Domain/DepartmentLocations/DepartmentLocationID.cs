@@ -4,10 +4,11 @@ namespace DirectoryService.Domain.DepartmentLocations;
 
 public sealed record DepartmentLocationID : EntityID
 {
-    public DepartmentLocationID(Guid value) 
+    private DepartmentLocationID(Guid value) 
         : base(value)
     {
     }
     
-    public static DepartmentLocationID New() => new(Guid.NewGuid());
+    public static DepartmentLocationID New(Guid? value = null) 
+        => new(value ?? Guid.NewGuid());
 }

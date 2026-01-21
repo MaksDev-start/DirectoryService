@@ -1,13 +1,14 @@
 ﻿using DirectoryService.Domain.Abstracts;
 
-namespace DirectoryService.Domain;
+namespace DirectoryService.Domain.DepartmentPositions;
 
-public sealed record DepartmentPositionID : EntityID
+public sealed record DepartmentPositionId : EntityID
 {
-public DepartmentPositionID(Guid value) 
+    private DepartmentPositionId(Guid value) 
     : base(value)
 {
 }
     
-public static DepartmentPositionID New() => new(Guid.NewGuid());
+public static DepartmentPositionId New(Guid? value = null) 
+    => new(value ?? Guid.NewGuid());
 }

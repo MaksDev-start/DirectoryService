@@ -4,7 +4,7 @@ namespace DirectoryService.Domain.Locations.ValueObjets;
 
 public sealed record Adress
 {
-    private const int MAX_LENGTH = 50;
+    public const int MAX_LENGTH = 50;
     private const int MIN_LENGTH = 3;
     
     private Adress(

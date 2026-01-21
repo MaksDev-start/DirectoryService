@@ -7,51 +7,60 @@ namespace DirectoryService.Domain.Departments;
 
 public sealed class Department
 {
-    private List<DepartmentLocation> _locations = [];
-    private List<DepartmentPosition> _positions = [];
+    // EF core
+    private Department()
+    {
+    }
+    
+    private readonly List<DepartmentLocation> _locations = [];
+    private readonly List<DepartmentPosition> _positions = [];
 
     private Department(
         DepartmentName name,
         DepartmentIndefier indefier, 
         DepartmentPath path, 
-        short depth,
-        Department? parent = null)
+        short? depth = null,
+        DepartmentId? parent = null)
     {
-        Id = DepartmentID.New();
+        Id = DepartmentId.New();
         Name = name;
         Indefier = indefier;
         Path = path;
         Depth = depth;
-        IsActiv = true;
+        IsActive = true;
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = CreatedAt;
-        Parent = parent;
+        ParentId = parent;
     }
     
-    public DepartmentID Id { get; }
+    public DepartmentId Id { get; }
 
     public DepartmentName Name { get; private set; }
 
     public DepartmentIndefier Indefier { get; private set; }
 
-    public Department? Parent { get; private set; }
+    public DepartmentId? ParentId { get; private set; }
     
     public DepartmentPath Path { get; private set; }
     
-    public short Depth { get; private set; }
+    public short? Depth { get; private set; }
     
-    public bool IsActiv { get; private set; }
+    public bool IsActive { get; private set; }
     
     public DateTime CreatedAt { get;  }
     
     public DateTime UpdatedAt { get; private set; }
+    
+    public IReadOnlyList<DepartmentLocation> DepartmentLocation => _locations;
+    
+    public IReadOnlyList<DepartmentPosition> DepartmentPosition => _positions;
 
     public static Result<Department> Create(
         string name,
         string indefier,
         string path,
         short depth,
-        Department? parent = null)
+        DepartmentId? parent = null)
     {
         var nameResult = DepartmentName.Create(name);
         if (nameResult.IsFailure)
