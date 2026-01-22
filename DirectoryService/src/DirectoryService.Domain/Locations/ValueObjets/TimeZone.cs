@@ -1,12 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 using CSharpFunctionalExtensions;
+using DirectoryService.Domain.Constants;
 
 namespace DirectoryService.Domain.Locations.ValueObjets;
 
 public sealed record TimeZone
 {
-    public const int MAX_LENGTH = 50;
-    private const int MIN_LENGTH = 2;
+    
     private const string IANA_TIME_ZONE_REGEX = @"^(?:[A-Za-z_]+/)?[A-Za-z_]+(?:/[A-Za-z_]+)*$";
     
     private TimeZone(string value)
@@ -23,7 +23,8 @@ public sealed record TimeZone
                 tz => !string.IsNullOrWhiteSpace(tz), 
                 "Time zone cannot be empty.")
             .Ensure(
-                tz => tz.Length >= MIN_LENGTH && tz.Length <= MAX_LENGTH, 
+                tz => tz.Length is >= LengthConstants.MINLENGTH3 
+                    and <= LengthConstants.MAXLENGTH50, 
                 "Time zone must be 2-50 characters.")
             .Ensure(
                 tz => Regex.IsMatch(timeZone, IANA_TIME_ZONE_REGEX), 

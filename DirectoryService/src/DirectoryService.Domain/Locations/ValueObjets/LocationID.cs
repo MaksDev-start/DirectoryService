@@ -2,7 +2,7 @@
 
 namespace DirectoryService.Domain.Locations.ValueObjets;
 
-public sealed record LocationID : EntityID
+public sealed record LocationID : BaseId
 {
     private LocationID(Guid value)
         : base(value)

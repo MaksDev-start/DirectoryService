@@ -2,7 +2,7 @@
 
 namespace DirectoryService.Domain.DepartmentLocations;
 
-public sealed record DepartmentLocationID : EntityID
+public sealed record DepartmentLocationID : BaseId
 {
     private DepartmentLocationID(Guid value) 
         : base(value)

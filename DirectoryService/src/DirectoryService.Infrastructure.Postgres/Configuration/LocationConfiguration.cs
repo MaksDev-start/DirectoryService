@@ -1,4 +1,5 @@
-﻿using DirectoryService.Domain.Locations;
+﻿using DirectoryService.Domain.Constants;
+using DirectoryService.Domain.Locations;
 using DirectoryService.Domain.Locations.ValueObjets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -22,7 +23,7 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
         {
             b.Property(n => n.Value)
                 .HasColumnName("name")
-                .HasMaxLength(LocationName.MAX_LENGTH);
+                .HasMaxLength(LengthConstants.MAXLENGTH120);
 
             b.HasIndex(n => n.Value).IsUnique().HasDatabaseName(Indexes.LOCATION_NAME);
         });
@@ -31,17 +32,17 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
         {
             la.Property(a => a.Country)
                 .HasColumnName("country")
-                .HasMaxLength(LocationName.MAX_LENGTH)
+                .HasMaxLength(LengthConstants.MAXLENGTH50)
                 .IsRequired();
             
             la.Property(a => a.City)
                 .HasColumnName("city")
-                .HasMaxLength(Adress.MAX_LENGTH)
+                .HasMaxLength(LengthConstants.MAXLENGTH50)
                 .IsRequired();
             
             la.Property(a => a.Street)
                 .HasColumnName("street")
-                .HasMaxLength(Adress.MAX_LENGTH)
+                .HasMaxLength(LengthConstants.MAXLENGTH50)
                 .IsRequired();
 
             la.Property(a => a.HouseNumber)
@@ -53,7 +54,7 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
         builder.Property(l => l.TimeZone)
             .HasConversion(ltz => ltz.Value, s => TimeZone.Create(s).Value)
             .HasColumnName("time_zone")
-            .HasMaxLength(TimeZone.MAX_LENGTH)
+            .HasMaxLength(LengthConstants.MAXLENGTH50)
             .IsRequired();
         
         builder.Property(l => l.IsActive)

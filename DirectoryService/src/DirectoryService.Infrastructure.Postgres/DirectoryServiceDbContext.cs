@@ -15,15 +15,15 @@ public class DirectoryServiceDbContext : DbContext
     {
     }
     
-    public DbSet<Department> Departments { get; set; }
+    public DbSet<Department> Departments => Set<Department>();
 
-    public DbSet<Location> Locations { get; set; }
+    public DbSet<Location> Locations => Set<Location>();
     
-    public DbSet<Position> Positions { get; set; }
+    public DbSet<Position> Positions => Set<Position>();
     
-    public DbSet<DepartmentLocation> DepartmentLocations { get; set; }
+    public DbSet<DepartmentLocation> DepartmentLocations => Set<DepartmentLocation>();
     
-    public DbSet<DepartmentPosition> DepartmentPositions { get; set; }
+    public DbSet<DepartmentPosition> DepartmentPositions => Set<DepartmentPosition>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,4 +1,5 @@
-﻿using DirectoryService.Domain.Departments;
+﻿using DirectoryService.Domain.Constants;
+using DirectoryService.Domain.Departments;
 using DirectoryService.Domain.Departments.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -9,7 +10,7 @@ public class DeportmentConfiguration : IEntityTypeConfiguration<Department>
 {
     public void Configure(EntityTypeBuilder<Department> builder)
     {
-        builder.ToTable("deportment");
+        builder.ToTable("department");
         
         builder.HasKey(d => d.Id).HasName("pk_deportment");
 
@@ -20,13 +21,13 @@ public class DeportmentConfiguration : IEntityTypeConfiguration<Department>
         builder.Property(d => d.Name)
             .HasConversion(dn => dn.Value, s => DepartmentName.Create(s).Value)
             .HasColumnName("name")
-            .HasMaxLength(DepartmentName.MAX_LENGTH)
+            .HasMaxLength(LengthConstants.MAXLENGTH150)
             .IsRequired();
         
         builder.Property(d => d.Indefier)
             .HasConversion(di => di.Value, s => DepartmentIndefier.Create(s).Value)
             .HasColumnName("indefier")
-            .HasMaxLength(DepartmentIndefier.MAX_LENGTH)
+            .HasMaxLength(LengthConstants.MAXLENGTH150)
             .IsRequired();
 
         builder.Property(d => d.ParentId)
@@ -37,7 +38,7 @@ public class DeportmentConfiguration : IEntityTypeConfiguration<Department>
         builder.Property(d => d.Path)
             .HasConversion(dp => dp.Value, s => DepartmentPath.Create(s, null).Value)
             .HasColumnName("path")
-            .HasMaxLength(DepartmentPath.MAX_LENGTH)
+            .HasMaxLength(LengthConstants.MAXLENGTH100)
             .IsRequired();
 
         builder.Property(d => d.Depth)

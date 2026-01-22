@@ -2,7 +2,7 @@
 
 namespace DirectoryService.Domain.Departments.ValueObjects;
 
-public sealed record DepartmentId : EntityID
+public sealed record DepartmentId : BaseId
 {
     private DepartmentId(Guid value)
         : base(value)

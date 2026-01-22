@@ -2,7 +2,7 @@
 
 namespace DirectoryService.Domain.Positions.ValueObjects;
 
-public sealed record PositionId : EntityID
+public sealed record PositionId : BaseId
 {
     private PositionId(Guid value) 
         : base(value)

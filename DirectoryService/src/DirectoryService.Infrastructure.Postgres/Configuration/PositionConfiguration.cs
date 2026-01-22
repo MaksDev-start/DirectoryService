@@ -1,4 +1,5 @@
-﻿using DirectoryService.Domain.Positions;
+﻿using DirectoryService.Domain.Constants;
+using DirectoryService.Domain.Positions;
 using DirectoryService.Domain.Positions.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -21,7 +22,7 @@ public class PositionConfiguration : IEntityTypeConfiguration<Position>
         {
             b.Property(n => n.Value)
                 .HasColumnName("name")
-                .HasMaxLength(PositionName.MAX_LENGTH);
+                .HasMaxLength(LengthConstants.MAXLENGTH100);
             
             b.HasIndex(n => n.Value).IsUnique().HasDatabaseName(Indexes.POSITION_NAME);
         });
@@ -29,7 +30,7 @@ public class PositionConfiguration : IEntityTypeConfiguration<Position>
         builder.Property(p => p.Description)
             .HasConversion(pd => pd!.Value, s => Description.Create(s).Value)
             .HasColumnName("description")
-            .HasMaxLength(Description.MAX_LENGTH)
+            .HasMaxLength(LengthConstants.MAXLENGTH1000)
             .IsRequired(false);
 
         builder.Property(p => p.IsActive)
