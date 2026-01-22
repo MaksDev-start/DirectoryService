@@ -10,7 +10,7 @@ public class DeportmentConfiguration : IEntityTypeConfiguration<Department>
 {
     public void Configure(EntityTypeBuilder<Department> builder)
     {
-        builder.ToTable("department");
+        builder.ToTable("departments");
         
         builder.HasKey(d => d.Id).HasName("pk_deportment");
 
