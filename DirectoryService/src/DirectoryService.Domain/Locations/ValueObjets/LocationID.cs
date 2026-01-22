@@ -2,12 +2,13 @@
 
 namespace DirectoryService.Domain.Locations.ValueObjets;
 
-public sealed record LocationID : EntityID
+public sealed record LocationID : BaseId
 {
     private LocationID(Guid value)
         : base(value)
     {
     }
 
-    public static LocationID New() => new(Guid.NewGuid());
+    public static LocationID New(Guid? value = null) 
+        => new(value ?? Guid.NewGuid());
 }

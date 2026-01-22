@@ -1,10 +1,10 @@
 ﻿namespace DirectoryService.Domain.Abstracts;
 
-public abstract record EntityID
+public abstract record BaseId
 {
-    protected EntityID(Guid value) => Value = value;
+    protected BaseId(Guid value) => Value = value;
     public Guid Value { get; }
 
-    public static implicit operator Guid(EntityID id) => id.Value;
-    public static implicit operator string(EntityID id) => id.Value.ToString();
+    public static implicit operator Guid(BaseId id) => id.Value;
+    public static implicit operator string(BaseId id) => id.Value.ToString();
 }

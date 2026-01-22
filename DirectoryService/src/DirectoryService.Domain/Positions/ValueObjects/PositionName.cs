@@ -1,12 +1,10 @@
 ﻿using CSharpFunctionalExtensions;
+using DirectoryService.Domain.Constants;
 
 namespace DirectoryService.Domain.Positions.ValueObjects;
 
 public sealed record PositionName
 {
-    private const int MAX_LENGTH = 100;
-    private const int MIN_LENGTH = 3;
-    
     private PositionName(string value)
     {
         Value = value;
@@ -21,11 +19,11 @@ public sealed record PositionName
                 name => !string.IsNullOrWhiteSpace(name),
                 "Position name cannot be empty")
             .Ensure(
-                name => name.Length <= MAX_LENGTH,
-                $"Position name cannot exceed {MAX_LENGTH} characters.")
+                name => name.Length <= LengthConstants.MAXLENGTH100,
+                $"Position name cannot exceed {LengthConstants.MAXLENGTH100} characters.")
             .Ensure(
-                name => name.Length >= MIN_LENGTH,
-                $"Position name must be at least {MIN_LENGTH} characters.")
+                name => name.Length >= LengthConstants.MINLENGTH3,
+                $"Position name must be at least {LengthConstants.MINLENGTH3} characters.")
             .Map(name => new PositionName(name));
 
     }

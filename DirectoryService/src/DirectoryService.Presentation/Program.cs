@@ -1,3 +1,4 @@
+using DirectoryService.Infrastructure.Postgres;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,14 @@ builder.Services.AddSwaggerGen(options =>
         Title = "Directory Service API",
     });
 });
+
+builder.Services.AddPostgresInfrastructure(builder.Configuration, LoggerFactory.Create(loggingBuilder =>
+{
+    loggingBuilder.AddConfiguration(builder.Configuration.GetSection("Logging"));
+    loggingBuilder.AddConsole();
+    loggingBuilder.AddDebug();
+    loggingBuilder.AddEventSourceLogger();
+}));
 
 var app = builder.Build();
 

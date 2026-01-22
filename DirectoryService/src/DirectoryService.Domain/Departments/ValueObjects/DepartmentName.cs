@@ -1,11 +1,10 @@
 ﻿using CSharpFunctionalExtensions;
+using DirectoryService.Domain.Constants;
 
 namespace DirectoryService.Domain.Departments.ValueObjects;
 
 public sealed record DepartmentName
 {
-    private const int MAX_LENGTH = 150;
-    private const int MIN_LENGTH = 3;
     
     private DepartmentName(string value)
     {
@@ -21,12 +20,12 @@ public sealed record DepartmentName
                 name => !string.IsNullOrWhiteSpace(name),
                 "Department name cannot be empty")
             .Ensure(
-                name => name.Length <= MAX_LENGTH,
-                $"Department name cannot exceed {MAX_LENGTH} characters.")
+                name => name.Length <= LengthConstants.MAXLENGTH150,
+                $"Department name cannot exceed {LengthConstants.MAXLENGTH150} characters.")
             .Ensure(
-                name => name.Length >= MIN_LENGTH,
-                $"Department name must be at least {MIN_LENGTH} characters.")
-            .Map(name => new DepartmentName(name));
+                name => name.Length >= LengthConstants.MINLENGTH3,
+                $"Department name must be at least {LengthConstants.MINLENGTH3} characters.")
+            .Map<string, DepartmentName>(name => new DepartmentName(name));
 
     }
 }

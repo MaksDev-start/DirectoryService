@@ -2,12 +2,13 @@
 
 namespace DirectoryService.Domain.Positions.ValueObjects;
 
-public sealed record PositionID : EntityID
+public sealed record PositionId : BaseId
 {
-    private PositionID(Guid value) 
+    private PositionId(Guid value) 
         : base(value)
     {
     }
     
-    public static PositionID New() => new(Guid.NewGuid());
+    public static PositionId New(Guid? value = null) 
+        => new(value ?? Guid.NewGuid());
 }

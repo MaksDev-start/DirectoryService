@@ -7,6 +7,11 @@ namespace DirectoryService.Domain.Locations;
 
 public sealed class Location
 {
+    // EF core
+    private Location()
+    {
+    }
+    
     private Location(
         LocationName name,
         TimeZone timeZone, 
@@ -16,12 +21,12 @@ public sealed class Location
         Name = name;
         TimeZone = timeZone;
         Adress = adress;
-        IsActiv = true;
+        IsActive = true;
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = CreatedAt;
     }
     
-    private List<DepartmentLocation> _departmentLocations = [];
+    private readonly List<DepartmentLocation> _departmentLocations = [];
     
     public LocationID Id { get; }
 
@@ -31,11 +36,13 @@ public sealed class Location
     
     public TimeZone TimeZone { get; private set; }
     
-    public bool IsActiv { get; private set; } 
+    public bool IsActive { get; private set; } 
     
     public DateTime CreatedAt { get; }
     
     public DateTime UpdatedAt { get; private set; }
+    
+    public IReadOnlyList<DepartmentLocation> DepartmentLocation => _departmentLocations;
     
     public static Result<Location> Create(
         string name,

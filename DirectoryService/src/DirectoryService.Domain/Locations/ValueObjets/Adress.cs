@@ -1,11 +1,10 @@
 ﻿using CSharpFunctionalExtensions;
+using DirectoryService.Domain.Constants;
 
 namespace DirectoryService.Domain.Locations.ValueObjets;
 
 public sealed record Adress
 {
-    private const int MAX_LENGTH = 50;
-    private const int MIN_LENGTH = 3;
     
     private Adress(
         string country,
@@ -38,22 +37,22 @@ public sealed record Adress
                 () => !string.IsNullOrWhiteSpace(country),
                 "Country is required")
             .Ensure(
-                () => country.Length >= MIN_LENGTH &&
-                      country.Length <= MAX_LENGTH,
+                () => country.Length >= LengthConstants.MINLENGTH3 &&
+                      country.Length <= LengthConstants.MAXLENGTH50,
                 "Country  must be 2-50 characters.")
             .Ensure(
                 () => !string.IsNullOrWhiteSpace(city),
                 "City is required")
             .Ensure(
-                () => city.Length >= MIN_LENGTH &&
-                      city.Length <= MAX_LENGTH,
+                () => city.Length >= LengthConstants.MINLENGTH3 &&
+                      city.Length <= LengthConstants.MAXLENGTH50,
                 "City  must be 2-50 characters.")
             .Ensure(
                 () => !string.IsNullOrWhiteSpace(street),
                 "Street is required")
             .Ensure(
-                () => street.Length >= MIN_LENGTH &&
-                      street.Length <= MAX_LENGTH,
+                () => street.Length >= LengthConstants.MINLENGTH3 &&
+                      street.Length <= LengthConstants.MAXLENGTH50,
                 "Street  must be 2-50 characters.")
             .Map(() => new Adress(country, city, street, houseNumber));
 

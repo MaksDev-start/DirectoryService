@@ -1,12 +1,11 @@
 ﻿using CSharpFunctionalExtensions;
+using DirectoryService.Domain.Constants;
 
 namespace DirectoryService.Domain.Departments.ValueObjects;
 
 public sealed record DepartmentPath
 {
-    private const int MAX_LENGTH = 100;
-    private const int MIN_LENGTH = 2;
-    private const string Separator = ".";
+    private const string SEPARATOR = ".";
 
     private DepartmentPath(string value)
     {
@@ -22,14 +21,14 @@ public sealed record DepartmentPath
             return Result.Failure<DepartmentPath>("Department path cannot be empty.");
         }
 
-        if (path.Length > MAX_LENGTH)
+        if (path.Length > LengthConstants.MAXLENGTH100)
         {
-            return Result.Failure<DepartmentPath>($"Department path cannot exceed {MAX_LENGTH} characters.");
+            return Result.Failure<DepartmentPath>($"Department path cannot exceed {LengthConstants.MAXLENGTH100} characters.");
         }
 
-        if (path.Length < MIN_LENGTH)
+        if (path.Length < LengthConstants.MINLENGTH3)
         {
-            return Result.Failure<DepartmentPath>($"Department path must be at least {MIN_LENGTH} characters.");
+            return Result.Failure<DepartmentPath>($"Department path must be at least {LengthConstants.MINLENGTH3} characters.");
         }
 
         if (parent is null)
@@ -37,6 +36,6 @@ public sealed record DepartmentPath
             return Result.Success(new DepartmentPath(path));
         }
 
-        return Result.Success(new DepartmentPath($"{parent.Path.Value}{Separator}{path}"));
+        return Result.Success(new DepartmentPath($"{parent.Path.Value}{SEPARATOR}{path}"));
     }
 }
