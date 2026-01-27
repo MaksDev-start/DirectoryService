@@ -1,5 +1,6 @@
 ﻿using DirectoryService.Application;
-using DirectoryService.Infrastructure.Postgres.Repositories;
+using DirectoryService.Application.Locations.Database;
+using DirectoryService.Infrastructure.Postgres.Locations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,8 +31,8 @@ public static class DependencyInjectionExtensions
             
             options.UseLoggerFactory(loggerFactory);
         });
-
-        services.AddScoped<ITestRepositiry, TestRepository>();
+        
+        services.AddScoped<ILocationRepository, LocationsRepository>();
         
         return services;
     }

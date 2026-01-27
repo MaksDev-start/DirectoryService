@@ -50,7 +50,7 @@ public sealed class Location
         string country,
         string city,
         string street,
-        int? streetNumber)
+        int? houseNumber)
     {
         var nameResult = LocationName.Create(name);
         if (nameResult.IsFailure)
@@ -58,7 +58,7 @@ public sealed class Location
             return Result.Failure<Location>(nameResult.Error);
         }
         
-        var adressResult = Adress.Create(country, city, street, streetNumber);
+        var adressResult = Adress.Create(country, city, street, houseNumber);
         if (adressResult.IsFailure)
         {
             return Result.Failure<Location>(adressResult.Error);
