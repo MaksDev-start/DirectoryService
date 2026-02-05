@@ -1,6 +1,6 @@
 ﻿using DirectoryService.Domain.Abstracts;
 
-namespace DirectoryService.Domain.Locations.ValueObjets;
+namespace DirectoryService.Domain.Locations.ValueObjects;
 
 public sealed record LocationID : BaseId
 {

@@ -12,10 +12,13 @@ public class LocationsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(
         [FromServices] ICommandHandler<Guid, CreateLocationCommand> commandHandler,
-        [FromBody] CreateLocationDto locationRequest,
+        [FromBody] CreateLocationRequest locationRequest,
         CancellationToken cancellationToken)
     {
-        var command = new CreateLocationCommand(locationRequest);
+        var command = new CreateLocationCommand(
+            locationRequest.Name,
+            locationRequest.Adress,
+            locationRequest.TimeZone);
         
         var result = await commandHandler.Handle(command, cancellationToken);
 

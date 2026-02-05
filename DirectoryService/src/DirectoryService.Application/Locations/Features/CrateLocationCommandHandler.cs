@@ -2,7 +2,9 @@
 using DirectoryService.Application.Abstractions;
 using DirectoryService.Application.Locations.Database;
 using DirectoryService.Domain.Locations;
+using DirectoryService.Domain.Locations.ValueObjects;
 using Microsoft.Extensions.Logging;
+using TimeZone = DirectoryService.Domain.Locations.ValueObjects.TimeZone;
 
 namespace DirectoryService.Application.Locations.Features;
 
@@ -18,33 +20,39 @@ public class CrateLocationCommandHandler(
         CreateLocationCommand command,
         CancellationToken cancellationToken)
     {
+        var locationNameResult = LocationName.Create(command.Name);
+        if (locationNameResult.IsFailure)
+            return Result.Failure<Guid, string>(locationNameResult.Error);
+
+        var timeZoneResult = TimeZone.Create(command.TimeZone);
+        if (timeZoneResult.IsFailure)
+            return Result.Failure<Guid, string>(timeZoneResult.Error);
+
+        var adressResult = Adress.Create(
+            command.Adress.Country,
+            command.Adress.City,
+            command.Adress.Street,
+            command.Adress.HouseNumber);
+        if (adressResult.IsFailure)
+            return Result.Failure<Guid, string>(adressResult.Error);
+
         var locatoin = Location.Create(
-            command.LocationDto.Name,
-            command.LocationDto.TimeZone,
-            command.LocationDto.Adress.Country,
-            command.LocationDto.Adress.City,
-            command.LocationDto.Adress.Street,
-            command.LocationDto.Adress.HouseNumber);
+            locationNameResult.Value,
+            timeZoneResult.Value,
+            adressResult.Value);
 
-        if (locatoin.IsFailure)
-        {
-            _logger.LogError("Failed to create location. Error: {Error}", locatoin.Error);
-            
-            return Result.Failure<Location>(locatoin.Error).ToString();
-        }
-
-        var result = await _locationRepository.AddAsync(locatoin.Value, cancellationToken);
+        var result = await _locationRepository
+            .AddAsync(locatoin, cancellationToken);
 
         if (result.IsFailure)
         {
             _logger.LogError("Failed to add location. Error: {Error}", result.Error);
-            
+
             return result.Error;
         }
-        
-        _logger.LogInformation("Location created with id {locationId}", locatoin.Value.Id.Value);
-        
+
+        _logger.LogInformation("Location created with id {locationId}", result.Value);
+
         return result.Value;
     }
-
 }

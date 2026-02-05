@@ -3,4 +3,7 @@ using DirectoryService.Contracts.Locations.DTOs;
 
 namespace DirectoryService.Application.Locations.Features;
 
-public record CreateLocationCommand(CreateLocationDto LocationDto) : ICommand;
+public record CreateLocationCommand(
+    string Name,
+    AdressDto Adress,
+    string TimeZone) : ICommand;

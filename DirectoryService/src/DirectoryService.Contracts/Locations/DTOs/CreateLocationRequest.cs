@@ -1,6 +1,6 @@
 ﻿namespace DirectoryService.Contracts.Locations.DTOs;
 
-public record CreateLocationDto(
+public record CreateLocationRequest(
     string Name,
     AdressDto Adress,
     string TimeZone);
