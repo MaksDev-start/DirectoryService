@@ -1,9 +1,9 @@
 ﻿using DirectoryService.Domain.Constants;
 using DirectoryService.Domain.Locations;
-using DirectoryService.Domain.Locations.ValueObjets;
+using DirectoryService.Domain.Locations.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TimeZone = DirectoryService.Domain.Locations.ValueObjets.TimeZone;
+using TimeZone = DirectoryService.Domain.Locations.ValueObjects.TimeZone;
 
 namespace DirectoryService.Infrastructure.Postgres.Configuration;
 

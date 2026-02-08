@@ -2,12 +2,12 @@
 using CSharpFunctionalExtensions;
 using DirectoryService.Domain.Constants;
 
-namespace DirectoryService.Domain.Locations.ValueObjets;
+namespace DirectoryService.Domain.Locations.ValueObjects;
 
 public sealed record TimeZone
 {
     
-    private const string IANA_TIME_ZONE_REGEX = @"^(?:[A-Za-z_]+/)?[A-Za-z_]+(?:/[A-Za-z_]+)*$";
+    private const string IANA_TIME_ZONE_REGEX = @"^[A-Za-z_]+/[A-Za-z_]+$";
     
     private TimeZone(string value)
     {

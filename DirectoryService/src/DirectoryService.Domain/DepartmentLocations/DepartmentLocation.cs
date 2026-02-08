@@ -1,7 +1,7 @@
 ﻿using DirectoryService.Domain.Departments;
 using DirectoryService.Domain.Departments.ValueObjects;
 using DirectoryService.Domain.Locations;
-using DirectoryService.Domain.Locations.ValueObjets;
+using DirectoryService.Domain.Locations.ValueObjects;
 
 namespace DirectoryService.Domain.DepartmentLocations;
 
