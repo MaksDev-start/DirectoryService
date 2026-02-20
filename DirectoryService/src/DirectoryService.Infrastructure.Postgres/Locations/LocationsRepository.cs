@@ -1,6 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using DirectoryService.Application.Locations.Database;
 using DirectoryService.Domain.Locations;
+using DirectoryService.Shared;
 using Microsoft.Extensions.Logging;
 
 namespace DirectoryService.Infrastructure.Postgres.Locations;
@@ -12,7 +13,7 @@ public class LocationsRepository(
     private ILogger<LocationsRepository> _logger = logger;
     private readonly DirectoryServiceDbContext _dbContext = dbContext;
 
-    public async Task<Result<Guid, string>> AddAsync(
+    public async Task<Result<Guid, Error>> AddAsync(
         Location location,
         CancellationToken cancellationToken)
     {
@@ -25,7 +26,7 @@ public class LocationsRepository(
         catch (Exception e)
         {
             _logger.LogError("Failed to add location. Error: {Error}", e.Message);
-            return e.Message;
+            return GeneralErrors.Failure("Failed to add location.");
         }
     }
 }

@@ -28,7 +28,7 @@ public class LocationConfiguration : IEntityTypeConfiguration<Location>
             b.HasIndex(n => n.Value).IsUnique().HasDatabaseName(Indexes.LOCATION_NAME);
         });
 
-        builder.ComplexProperty(l => l.Adress, la =>
+        builder.ComplexProperty(l => l.Address, la =>
         {
             la.Property(a => a.Country)
                 .HasColumnName("country")

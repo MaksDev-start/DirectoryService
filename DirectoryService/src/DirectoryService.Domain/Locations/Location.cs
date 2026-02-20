@@ -15,12 +15,12 @@ public sealed class Location
     private Location(
         LocationName name,
         TimeZone timeZone, 
-        Adress adress)
+        Address address)
     {
         Id = LocationID.New();
         Name = name;
         TimeZone = timeZone;
-        Adress = adress;
+        Address = address;
         IsActive = true;
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = CreatedAt;
@@ -32,7 +32,7 @@ public sealed class Location
 
     public LocationName Name { get; private set; }
     
-    public Adress Adress { get; private set; }
+    public Address Address { get; private set; }
     
     public TimeZone TimeZone { get; private set; }
     
@@ -47,9 +47,9 @@ public sealed class Location
     public static Location Create(
         LocationName name,
         TimeZone timeZone,
-        Adress adress)
+        Address address)
     {
-        return new Location(name, timeZone, adress);
+        return new Location(name, timeZone, address);
     }
     
 }
