@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using CSharpFunctionalExtensions;
 using DirectoryService.Domain.Constants;
+using DirectoryService.Shared;
 
 namespace DirectoryService.Domain.Departments.ValueObjects;
 
@@ -16,22 +17,25 @@ public sealed record DepartmentIndefier
     
     public string Value { get; }
 
-    public static Result<DepartmentIndefier> Create(string departamentIndefier)
+    public static Result<DepartmentIndefier, Error> Create(string departamentIdentifier)
     {
-        return Result.Success(departamentIndefier)
+        return Result.Success<string, Error>(departamentIdentifier)
             .Ensure(
-                indefier => !string.IsNullOrWhiteSpace(indefier),
-                "Department identifier cannot be empty")
+                identifier => !string.IsNullOrWhiteSpace(identifier),
+                GeneralErrors.ValueIsRequired("Department identifier cannot be empty"))
             .Ensure(
-                indefier => Regex.IsMatch(indefier, ONLY_LATIN),
-                "Department identifier must contain only Latin letters (a-z, A-Z).")
+                identifier => Regex.IsMatch(identifier, ONLY_LATIN),
+                GeneralErrors.ValueIsInvalid(
+                    "Department identifier must contain only Latin letters (a-z, A-Z)."))
             .Ensure(
-                indefier => indefier.Length <= LengthConstants.MAXLENGTH150,
-                $"Department identifier cannot exceed {LengthConstants.MAXLENGTH150} characters.")
+                identifier => identifier.Length <= LengthConstants.MAXLENGTH150,
+                GeneralErrors.ValueIsInvalid(
+                    $"Department identifier cannot exceed {LengthConstants.MAXLENGTH150} characters."))
             .Ensure(
-                indefier => indefier.Length >= LengthConstants.MINLENGTH3,
-                $"Department identifier must be at least {LengthConstants.MINLENGTH3} characters.")
-            .Map(indefier => new DepartmentIndefier(indefier));
+                identifier => identifier.Length >= LengthConstants.MINLENGTH3,
+                GeneralErrors.ValueIsInvalid(
+                    $"Department identifier must be at least {LengthConstants.MINLENGTH3} characters."))
+            .Map(identifier => new DepartmentIndefier(identifier.Trim()));
 
     }
 
